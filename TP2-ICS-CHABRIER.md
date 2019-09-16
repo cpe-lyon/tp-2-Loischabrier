@@ -84,3 +84,56 @@ fi**
 
 Normalement, en faisant un `./testpwd.sh`, il n'est pas possible d'exécuter le script car nous n'avons pas les permissions. 
 Pour corriger le problème, entrer `chmod u+x testpwd.sh`. Désormais, il est possible de tester le script et il doit être fonctionnel.
+
+## Exercice 3. Expressions rationnelles
+
+<br>
+Ecrivez un script qui prend un paramètre et utilise la fonction suivante pour vérifier que ce paramètre
+est un nombre réel :
+
+<br>
+Il faut tout d'abord créer un nouveau fichier dans le dossier script que l'on appelera "ScriptEX3" : `touch ScriptEX3.sh`.
+Il ne faut pas oublié de lui donner les bons droits avant de l'exécuter : `chmod u+x ScriptEX3.sh`.
+Enfin, il n'y a plus qu'à écrire le script : 
+<br>
+
+**function is_number()**
+**{**
+
+**re='^[+-]?[0-9]+([.][0-9]+)?$' 
+<br>
+if ! [[ $1 =~ $re ]] ; then
+<br>
+return 1 
+<br>
+else
+<br>
+return 0
+<br>
+fi
+<br>
+}**
+<br>
+
+**is_number $1 
+if [ $? = 0 ]; then
+<br>
+        echo "C'est un nombre réel" <br>
+                else <br>
+        echo "C'est un nombre non réel" <br>
+fi**
+
+## Exercice 4. Contrôle d’utilisateur
+
+<br>
+Écrivez un script qui vérifie l’existence d’un utilisateur dont le nom est donné en paramètre du script. Si le
+script est appelé sans nom d’utilisateur, il affiche le message : ”Utilisation : nom_du_script nom_utilisateur”,
+où nom_du_script est le nom de votre script récupéré automatiquement (si vous changez le nom de votre
+script, le message doit changer automatiquement)
+
+<br>
+Comme d'habitude, on créé un nouveau fichier dans le dossier script : `touch ScriptEX4.sh` en lui affectant les bons droits.
+Ensuite, passons à l'écriture du script : 
+<br>
+
+
