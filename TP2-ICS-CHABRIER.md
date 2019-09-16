@@ -71,16 +71,16 @@ contenu d’une variable PASSWORD dont le contenu est codé en dur dans le scrip
 Dans le dossier "script" créé précedemment, créer un fichier "testpwd.sh" avec `touch testpwd.sh`. 
 Une fois créé, entrer dans la configuration du fichier avec `nano testpwd.sh` pour y écrire le script suivant :
 
-**PASSWORD=11;**
+        PASSWORD=11;
 
-**echo 'entrer un mot de passe'<br>
-read pass<br>**
+        echo 'entrer un mot de passe'
+        read pass
 
-**if [ $pass = $PASSWORD ]; then<br>
-  echo "Bon mot de passe"<br>
-else <br>
-  echo "Mauvais mot de passe"<br>
-fi**
+        if [ $pass = $PASSWORD ]; then
+              echo "Bon mot de passe"
+        else
+              echo "Mauvais mot de passe"
+        fi
 
 Normalement, en faisant un `./testpwd.sh`, il n'est pas possible d'exécuter le script car nous n'avons pas les permissions. 
 Pour corriger le problème, entrer `chmod u+x testpwd.sh`. Désormais, il est possible de tester le script et il doit être fonctionnel.
@@ -97,31 +97,22 @@ Il ne faut pas oublié de lui donner les bons droits avant de l'exécuter : `chm
 Enfin, il n'y a plus qu'à écrire le script : 
 <br>
 
-**function is_number()**
-**{**
+        function is_number()
+        {
+                re='^[+-]?[0-9]+([.][0-9]+)?$' 
+                        if ! [[ $1 =~ $re ]] ; then
+                                return 1 
+                        else
+                                return 0
+                        fi
+        }
 
-**re='^[+-]?[0-9]+([.][0-9]+)?$' 
-<br>
-if ! [[ $1 =~ $re ]] ; then
-<br>
-return 1 
-<br>
-else
-<br>
-return 0
-<br>
-fi
-<br>
-}**
-<br>
-
-**is_number $1 
-if [ $? = 0 ]; then
-<br>
-        echo "C'est un nombre réel" <br>
-                else <br>
-        echo "C'est un nombre non réel" <br>
-fi**
+        is_number $1 
+        if [ $? = 0 ]; then
+                echo "C'est un nombre réel"
+                        else
+                echo "C'est un nombre non réel"
+        fi
 
 ## Exercice 4. Contrôle d’utilisateur
 
@@ -136,4 +127,21 @@ Comme d'habitude, on créé un nouveau fichier dans le dossier script : `touch S
 Ensuite, passons à l'écriture du script : 
 <br>
 
+        function utilisateur()
+        {
 
+        grep -w ^$1 /etc/passwd;
+
+        }
+
+        if [ -z "$1" ]; then
+                echo "Utilisation : $(basename "$0") nom_utilisateur"
+        else
+
+                utilisateur $1
+                if [ $? = 0 ]; then
+                    echo "L'utilisateur existe"
+                else
+                    echo "L'utilisateur n'existe pas"
+                fi
+         fi
