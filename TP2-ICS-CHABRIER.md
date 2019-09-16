@@ -17,10 +17,10 @@ C'est la variable d'environnement `$HOME` qui permet à la commande `cd` passée
 
 <span style='color:red'>3.</span> Explicitez le rôle des variables LANG, PWD, OLDPWD, SHELL et _.
 
-La variable `$LANG` est utilisée pour déterminer la langue des messages à afficher.
-La variable `$PWD` permet de savoir où l'on se trouve dans l'arborescence. Elle retourne le chemin absolu vers le répertoire courant.
-La variable `$OLDPWD` permet de savoir d'où l'on vient, c'est-à-dire qu'elle retourne le chemin absolu vers le répertoire courant précédent.
-La variable `$SHELL` retourne le chemin vers l'interpréteur SHELL utilisé par défaut.
+  - La variable `$LANG` est utilisée pour déterminer la langue des messages à afficher.
+  - La variable `$PWD` permet de savoir où l'on se trouve dans l'arborescence. Elle retourne le chemin absolu vers le répertoire courant.
+  - La variable `$OLDPWD` permet de savoir d'où l'on vient, c'est-à-dire qu'elle retourne le chemin absolu vers le répertoire courant précédent.
+  - La variable `$SHELL` retourne le chemin vers l'interpréteur SHELL utilisé par défaut.
 
 
 <span style='color:red'>4.</span> Créez une variable locale MY_VAR (le contenu n’a pas d’importance). Vérifiez que la variable existe.
@@ -66,8 +66,19 @@ Pour se faire, dans le répertoire personnel, entrer `mkdir script` puis `nano .
 
 <br>
 Écrivez un script testpwd.sh qui demande de saisir un mot de passe et vérifie s’il correspond ou non au
-contenu d’une variable PASSWORD dont le contenu est codé en dur dans le script. Le mot de passe saisi par
-l’utilisateur ne doit pas s’afficher.
+contenu d’une variable PASSWORD dont le contenu est codé en dur dans le script. Le mot de passe saisi par l’utilisateur ne doit pas s’afficher.
 
+Dans le dossier "script" créé précedemment, créer un fichier "testpwd.sh" avec `touch testpwd.sh`. 
+Une fois créé, entrer dans la configuration du fichier avec `nano testpwd.sh` pour y écrire le script suivant :
 
+`PASSWORD=11;
+
+echo 'entrer un mot de passe'<br>
+read pass<br>
+
+if [ $pass = $PASSWORD ]; then<br>
+  echo "Bon mot de passe"<br>
+else <br>
+  echo "Mauvais mot de passe"<br>
+fi`
 
