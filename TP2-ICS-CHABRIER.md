@@ -71,14 +71,16 @@ contenu d’une variable PASSWORD dont le contenu est codé en dur dans le scrip
 Dans le dossier "script" créé précedemment, créer un fichier "testpwd.sh" avec `touch testpwd.sh`. 
 Une fois créé, entrer dans la configuration du fichier avec `nano testpwd.sh` pour y écrire le script suivant :
 
-`PASSWORD=11;
+**PASSWORD=11;**
 
-echo 'entrer un mot de passe'<br>
-read pass<br>
+**echo 'entrer un mot de passe'<br>
+read pass<br>**
 
-if [ $pass = $PASSWORD ]; then<br>
+**if [ $pass = $PASSWORD ]; then<br>
   echo "Bon mot de passe"<br>
 else <br>
   echo "Mauvais mot de passe"<br>
-fi`
+fi**
 
+Normalement, en faisant un `./testpwd.sh`, il n'est pas possible d'exécuter le script car nous n'avons pas les permissions. 
+Pour corriger le problème, entrer `chmod u+x testpwd.sh`. Désormais, il est possible de tester le script et il doit être fonctionnel.
