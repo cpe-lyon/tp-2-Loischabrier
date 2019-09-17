@@ -71,7 +71,9 @@ contenu d’une variable PASSWORD dont le contenu est codé en dur dans le scrip
 Dans le dossier "script" créé précedemment, créer un fichier "testpwd.sh" avec `touch testpwd.sh`. 
 Une fois créé, entrer dans la configuration du fichier avec `nano testpwd.sh` pour y écrire le script suivant :
 
-        PASSWORD=11;
+       #!/bin/sh
+       
+       PASSWORD=11;
 
         echo 'entrer un mot de passe'
         read pass
@@ -96,6 +98,8 @@ Il faut tout d'abord créer un nouveau fichier dans le dossier script que l'on a
 Il ne faut pas oublié de lui donner les bons droits avant de l'exécuter : `chmod u+x ScriptEX3.sh`.
 Enfin, il n'y a plus qu'à écrire le script : 
 <br>
+
+        #!/bin/sh
 
         function is_number()
         {
@@ -127,6 +131,8 @@ Comme d'habitude, on créé un nouveau fichier dans le dossier script : `touch S
 Ensuite, passons à l'écriture du script : 
 <br>
 
+        #!/bin/sh 
+         
         function utilisateur()
         {
 
@@ -145,3 +151,63 @@ Ensuite, passons à l'écriture du script :
                     echo "L'utilisateur n'existe pas"
                 fi
          fi
+        
+## Exercice 5. Factorielle
+
+<br>
+Écrivez un programme qui calcule la factorielle d’un entier naturel passé en paramètre (on supposera que l’utilisateur saisit toujours un entier naturel).
+
+<br>
+Comme d'habitude, on créé un nouveau fichier dans le dossier script : `touch ScriptEX5.sh` en lui affectant les bons droits.
+Ensuite, passons à l'écriture du script : 
+<br>
+
+        #!/bin/sh 
+        
+        function factorielle() {
+              n=$1
+              if [ $n -eq 0 ]; then
+                     echo "Entrer autre chose que 0 svp"
+              else
+                     echo $(( n * `factorielle $(( n - 1 ))` ))
+               fi
+        }
+
+        echo "Resultat : $(factorielle $1)"
+
+## Exercice 6. Le juste prix
+
+<br>
+Écrivez un script qui génère un nombre aléatoire entre 1 et 1000 et demande à l’utilisateur de le deviner. Le programme écrira ”C’est plus!”, ”C’est moins!” ou ”Gagné!” selon les cas (vous utiliserez $RANDOM).
+
+<br>
+Comme d'habitude, on créé un nouveau fichier dans le dossier script : `touch ScriptEX6.sh` en lui affectant les bons droits.
+Ensuite, passons à l'écriture du script : 
+<br>
+
+        #!/bin/sh 
+        
+        NBALEATOIRE=$(( ( RANDOM % 1000 )  + 1 ))
+        NB_WHILE=-24
+        echo "Essaye de trouver un nombre entre 1 et 1000 !"
+        while [ $NBALEATOIRE != $NB_WHILE ]
+            do
+                echo "Allé je t'aide un peu... Le nombre à trouver est" $NBALEATOIRE
+                read NB_WHILE
+                if [ $NBALEATOIRE -lt $NB_WHILE ]; then
+                      echo "Le nombre à trouver est plus petit"
+                elif [ $NBALEATOIRE -gt $NB_WHILE ]; then
+                      echo "T'es pas très bon.. C'est plus grand"
+                fi
+            done
+        echo "Quel homme (ou femme), t'es tombé pleins dans le mille!!"
+
+## Exercice 7. Statistiques
+
+<br>
+Écrivez un script qui prend en paramètres trois entiers (entre -100 et +100) et affiche le min, le max et la moyenne. Vous pouvez réutiliser la fonction de l’exercice 3 pour vous assurer que les paramètres sont bien des entiers.
+
+<br>
+Comme d'habitude, on créé un nouveau fichier dans le dossier script : `touch ScriptEX7.sh` en lui affectant les bons droits.
+Ensuite, passons à l'écriture du script : 
+<br>
