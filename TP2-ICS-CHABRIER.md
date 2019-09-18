@@ -205,9 +205,63 @@ Ensuite, passons à l'écriture du script :
 ## Exercice 7. Statistiques
 
 <br>
-Écrivez un script qui prend en paramètres trois entiers (entre -100 et +100) et affiche le min, le max et la moyenne. Vous pouvez réutiliser la fonction de l’exercice 3 pour vous assurer que les paramètres sont bien des entiers.
-
+Écrivez un script qui prend en paramètres trois entiers (entre -100 et +100) et affiche le min, le max et la moyenne. Vous pouvez réutiliser la fonction de l’exercice 3 pour vous assurer que les paramètres sont bien des entiers. 
 <br>
 Comme d'habitude, on créé un nouveau fichier dans le dossier script : `touch ScriptEX7.sh` en lui affectant les bons droits.
 Ensuite, passons à l'écriture du script : 
 <br>
+    
+    #!/bin/sh
+    
+    function reelounon()
+    {
+            re='^[+-]?[0-9]+([.][0-9]+)?$'
+            if ! [[ $nb =~ $re ]] ; then
+                    return 1
+            else
+                    return 0
+            fi
+    }
+
+    keep=1
+    nb=0
+    i=0
+    marks=()
+
+    while [ $keep != 0 ]
+    do
+            echo "entrez une note"
+            read nb
+
+            reelounon $nb
+            if [ "$?" != "0" ]; then
+                    echo "merci d'entrer que des réels"
+            else
+                    marks[$i]=$nb
+            fi
+
+            echo "continuer ? o / n"
+            read answer
+            if [ "$answer" = "n" ]; then
+                    keep=0;
+            fi
+
+            ((i++))
+    done
+
+    mini=${marks[0]}
+    maxi=${marks[0]}
+    moy=0
+    longueurtableau=${#marks[@]}
+    for mark in "${marks[@]}"
+    do
+            if [[ $mark < $mini ]]; then
+                    mini=$mark
+            fi
+            if [[ $mark > $maxi ]]; then
+                    maxi=$mark
+            fi
+            ((moy=moy+mark))
+    done
+    moy=$((moy / longueurtableau))
+    echo "le max est $maxi, le min est $mini et la moyenne est de $moy"
